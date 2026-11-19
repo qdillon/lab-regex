@@ -13,7 +13,7 @@ def has_digit(text):
     False
     '''
     # TODO: your regex here (re.search returns a match or None -- wrap it in bool)
-    pass
+    return bool(re.search(r'\d', text))
 
 
 def find_numbers(text):
@@ -26,7 +26,7 @@ def find_numbers(text):
     []
     '''
     # TODO: your regex here (re.findall with a quantifier)
-    pass
+    return re.findall(r'\d+', text)
 
 
 def mask_digits(text):
@@ -39,7 +39,7 @@ def mask_digits(text):
     'no digits'
     '''
     # TODO: your regex here (re.sub)
-    pass
+    return re.sub(r'\d', 'X', text)
 
 
 def find_hashtags(text):
@@ -52,7 +52,7 @@ def find_hashtags(text):
     []
     '''
     # TODO: your regex here (match the '#', then capture the word after it)
-    pass
+    return re.findall(r'#(\w+)', text)
 
 
 def find_mentions(text):
@@ -65,7 +65,7 @@ def find_mentions(text):
     []
     '''
     # TODO: your regex here (a capture group, like find_hashtags)
-    pass
+    return re.findall(r'@(\w+)', text)
 
 
 def find_urls(text):
@@ -78,7 +78,7 @@ def find_urls(text):
     []
     '''
     # TODO: your regex here (make the 's' optional, then grab the non-spaces)
-    pass
+    return re.findall(r'https?://\S+', text)
 
 
 def find_phone_numbers(text):
@@ -91,7 +91,7 @@ def find_phone_numbers(text):
     []
     '''
     # TODO: your regex here (three digits, dash, three digits, dash, four digits)
-    pass
+    return re.findall(r'\d{3}-\d{3}-\d{4}', text)
 
 
 def area_code(phone):
@@ -104,7 +104,7 @@ def area_code(phone):
     '800'
     '''
     # TODO: your regex here (capture the first group, then read it with .group)
-    pass
+    return re.search(r'(\d{3})-\d{3}-\d{4}', phone).group(1)
 
 
 def redact_emails(text):
@@ -117,7 +117,7 @@ def redact_emails(text):
     'this line has no email'
     '''
     # TODO: your regex here (use re.sub to replace each email address)
-    pass
+    return re.sub(r'\S+@\S+', '[REDACTED]', text)
 
 
 def redact_ssns(text):
@@ -130,7 +130,7 @@ def redact_ssns(text):
     'no ssn in this record'
     '''
     # TODO: your regex here (an SSN is three digits, two digits, four digits)
-    pass
+    return re.sub(r'\d{3}-\d{2}-\d{4}', 'XXX-XX-XXXX', text)
 
 
 def mask_last_four(card):
@@ -143,7 +143,7 @@ def mask_last_four(card):
     '************1111'
     '''
     # TODO: your regex here (a 16-digit card has twelve digits before its last four)
-    pass
+    return re.sub(r'\d{12}(\d{4})', r'************\1', card)
 
 
 def is_valid_email(s):
@@ -160,4 +160,4 @@ def is_valid_email(s):
     False
     '''
     # TODO: use re.fullmatch for the entire email string, then bool the result.
-    pass
+    return bool(re.fullmatch(r'\S+@\S+', s))
